@@ -23,9 +23,8 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    public ResponseEntity<Map<String, Object>> AddUser(@RequestBody UserAddRequest request) {
 
-    public ResponseEntity<Map<String, Object>> AddUser(@RequestBody UserAddRequest request)
-    {
         UserDto result = userService.AddUser(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
@@ -38,8 +37,10 @@ public class UserController {
             path = "/api/users",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Map<String, Object>> getAllUser(){
+    public ResponseEntity<Map<String, Object>> getAllUser() {
+
         List<UserDto> result = userService.getAllUser();
+
         return ResponseEntity.status(HttpStatus.OK).body(Map.of(
                 "status", "success",
                 "data", result
@@ -50,8 +51,10 @@ public class UserController {
             path = "/api/users/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Map<String, Object>> getUserById(@PathVariable("id") String id){
+    public ResponseEntity<Map<String, Object>> getUserById(@PathVariable("id") String id) {
+
         UserDto result = userService.getUserById(id);
+
         return ResponseEntity.status(HttpStatus.OK).body(Map.of(
                 "status", "success",
                 "data", result
@@ -64,10 +67,12 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Map<String, Object>> UpdateUser(
-        @PathVariable("id") String id,
-        @RequestBody UserAddRequest request
-    ){
+            @PathVariable("id") String id,
+            @RequestBody UserAddRequest request
+    ) {
+
         UserDto result = userService.UpdateUser(id, request);
+
         return ResponseEntity.status(HttpStatus.OK).body(Map.of(
                 "status", "success",
                 "data", result
@@ -78,10 +83,12 @@ public class UserController {
             path = "/api/users/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Map<String, Object>> DeleteUser(@PathVariable("id") String id){
+    public ResponseEntity<Map<String, Object>> DeleteUser(@PathVariable("id") String id) {
+
         userService.DeleteUser(id);
+
         return ResponseEntity.status(HttpStatus.OK).body(Map.of(
-                "status", "success delete user with id" + id
+                "status", "success delete user with id " + id
         ));
     }
 }
